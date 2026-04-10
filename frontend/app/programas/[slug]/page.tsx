@@ -4,9 +4,15 @@ import Link from 'next/link'
 
 const ESFERA_LABEL = { federal: '🇧🇷 Federal', estadual: '📍 Estadual', municipal: '🏙️ Municipal' }
 
+export const dynamicParams = true
+
 export async function generateStaticParams() {
-  const programas = await getProgramas()
-  return programas.map((p) => ({ slug: p.slug }))
+  try {
+    const programas = await getProgramas()
+    return programas.map((p) => ({ slug: p.slug }))
+  } catch {
+    return []
+  }
 }
 
 export default async function ProgramaPage({ params }: { params: Promise<{ slug: string }> }) {
