@@ -1,5 +1,3 @@
-// frontend/types/programa.ts
-
 export type Esfera = 'federal' | 'estadual' | 'municipal'
 
 export type Area =
@@ -11,6 +9,10 @@ export type Area =
   | 'agricultura'
   | 'cultura'
   | 'outro'
+  | 'energia'
+  | 'alimentacao'
+  | 'saneamento'
+  | 'inclusao'
 
 export type PublicoAlvo =
   | 'familia'
@@ -21,11 +23,11 @@ export type PublicoAlvo =
   | 'pcd'
   | 'indigena'
   | 'outro'
+  | 'estudante'
 
 export type StatusPrograma = 'ativo' | 'encerrado' | 'suspenso'
 
 export interface Programa {
-  id: number
   slug: string
   nome: string
   descricao: string
@@ -43,21 +45,4 @@ export interface Programa {
   status: StatusPrograma
   data_atualizacao: string
   fonte: string
-}
-
-export interface PerfilUsuario {
-  estado: string
-  renda_per_capita: number
-  tamanho_familia: number
-  perfil: PublicoAlvo
-  area_interesse: Area | 'todos'
-}
-
-export type NivelMatch = 'total' | 'parcial'
-
-export interface ProgramaComMatch {
-  programa: Programa
-  nivel: NivelMatch
-  criterios_atendidos: number
-  criterios_total: number
 }

@@ -1,0 +1,62 @@
+[
+  {
+    "sigla": "federal",
+    "nome": "Programas Federais",
+    "descricao": "Benefícios disponíveis em todo o território nacional",
+    "total_programas": 6
+  },
+  {
+    "sigla": "PI",
+    "nome": "Piauí",
+    "descricao": "Programas estaduais do Governo do Piauí",
+    "total_programas": 7
+  },
+  {
+    "sigla": "CE",
+    "nome": "Ceará",
+    "descricao": "Programas estaduais do Governo do Ceará",
+    "total_programas": 0
+  },
+  {
+    "sigla": "BA",
+    "nome": "Bahia",
+    "descricao": "Programas estaduais do Governo da Bahia",
+    "total_programas": 0
+  },
+  {
+    "sigla": "PE",
+    "nome": "Pernambuco",
+    "descricao": "Programas estaduais do Governo de Pernambuco",
+    "total_programas": 0
+  },
+  {
+    "sigla": "RN",
+    "nome": "Rio Grande do Norte",
+    "descricao": "Programas estaduais do Governo do Rio Grande do Norte",
+    "total_programas": 0
+  },
+  {
+    "sigla": "MA",
+    "nome": "Maranhão",
+    "descricao": "Programas estaduais do Governo do Maranhão",
+    "total_programas": 0
+  },
+  {
+    "sigla": "PB",
+    "nome": "Paraíba",
+    "descricao": "Programas estaduais do Governo da Paraíba",
+    "total_programas": 0
+  },
+  {
+    "sigla": "AL",
+    "nome": "Alagoas",
+    "descricao": "Programas estaduais do Governo de Alagoas",
+    "total_programas": 0
+  },
+  {
+    "sigla": "SE",
+    "nome": "Sergipe",
+    "descricao": "Programas estaduais do Governo de Sergipe",
+    "total_programas": 0
+  }
+]

@@ -1,38 +1,165 @@
 import Link from 'next/link'
+import { getEstadosDisponiveis, getTodosProgramas } from '@/data'
+
+const AREA_ICONS: Record<string, string> = {
+  saude: '🏥',
+  educacao: '📚',
+  moradia: '🏠',
+  renda: '💰',
+  emprego: '💼',
+  agricultura: '🌾',
+  cultura: '🎭',
+  energia: '⚡',
+  alimentacao: '🍽️',
+  saneamento: '🚰',
+  inclusao: '🤝',
+  outro: '📋',
+}
 
 export default function HomePage() {
-  return (
-    <main className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
-      <div className="max-w-2xl mx-auto px-4 py-20 text-center">
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">
-          Descubra os programas públicos que são para você
-        </h1>
-        <p className="text-lg text-gray-600 mb-10">
-          Responda 5 perguntas e veja quais benefícios do governo federal e estadual você pode acessar.
-        </p>
+  const estados = getEstadosDisponiveis()
+  const todosProgramas = getTodosProgramas()
+  const totalProgramas = todosProgramas.length
+  const programasAtivos = todosProgramas.filter(p => p.status === 'ativo').length
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link
-            href="/quiz"
-            className="px-8 py-4 bg-blue-600 text-white rounded-xl font-semibold text-lg hover:bg-blue-700"
-          >
-            Descobrir meus benefícios →
-          </Link>
-          <Link
-            href="/programas"
-            className="px-8 py-4 bg-white text-gray-700 rounded-xl font-semibold text-lg border border-gray-200 hover:border-blue-300"
-          >
-            Ver todos os programas
-          </Link>
+  /* Contar áreas únicas */
+  const areasUnicas = new Set(todosProgramas.flatMap(p => p.areas))
+
+  return (
+    <main>
+      {/* ─── Hero ─── */}
+      <section className="gradient-hero relative overflow-hidden" id="hero">
+        {/* Padrão decorativo */}
+        <div className="absolute inset-0 opacity-5 pattern-dots" />
+
+        {/* Faixa amarela decorativa */}
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-brasil-gold/10 to-transparent" />
+
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 py-20 md:py-28">
+          <div className="max-w-2xl">
+            <div className="animate-fade-up">
+              <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 text-white/90 text-xs font-medium mb-6 backdrop-blur-sm border border-white/10">
+                🇧🇷 Plataforma aberta e colaborativa
+              </span>
+
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white leading-tight tracking-tight mb-5">
+                Descubra seus{' '}
+                <span className="text-brasil-gold">direitos</span>
+              </h1>
+
+              <p className="text-lg sm:text-xl text-white/80 leading-relaxed mb-8 max-w-lg">
+                Encontre benefícios do governo federal e estadual disponíveis para você e sua família — em um único lugar.
+              </p>
+            </div>
+
+            <div className="animate-fade-up flex flex-col sm:flex-row gap-3" style={{ animationDelay: '150ms' }}>
+              <Link
+                href="/programas"
+                className="btn-primary text-base px-6 py-3.5 bg-white text-brand-800 hover:bg-neutral-50 hover:shadow-xl"
+                id="cta-ver-programas"
+              >
+                Ver todos os programas
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                </svg>
+              </Link>
+              <Link
+                href="/contribuir"
+                className="btn-secondary text-base px-6 py-3.5 border-white/20 text-white bg-white/10 hover:bg-white/20 hover:border-white/30 backdrop-blur-sm"
+                id="cta-contribuir"
+              >
+                Contribuir com o catálogo
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Stats ─── */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 -mt-8 relative z-10">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="stat-card stat-card-green bg-white rounded-xl px-6 py-5 card-elevate animate-fade-up stagger-1">
+            <p className="text-3xl font-bold text-neutral-900">{totalProgramas}</p>
+            <p className="text-sm text-neutral-500 mt-0.5">Programas cadastrados</p>
+          </div>
+          <div className="stat-card stat-card-gold bg-white rounded-xl px-6 py-5 card-elevate animate-fade-up stagger-2">
+            <p className="text-3xl font-bold text-neutral-900">{programasAtivos}</p>
+            <p className="text-sm text-neutral-500 mt-0.5">Programas ativos</p>
+          </div>
+          <div className="stat-card stat-card-blue bg-white rounded-xl px-6 py-5 card-elevate animate-fade-up stagger-3">
+            <p className="text-3xl font-bold text-neutral-900">{areasUnicas.size}</p>
+            <p className="text-sm text-neutral-500 mt-0.5">Áreas de atuação</p>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Estados ─── */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 py-16 md:py-20" id="estados">
+        <div className="text-center mb-10 animate-fade-up">
+          <h2 className="text-2xl sm:text-3xl font-bold text-neutral-900 mb-3">
+            Explore por região
+          </h2>
+          <p className="text-neutral-500 max-w-md mx-auto">
+            Selecione um estado para ver os programas específicos da sua região
+          </p>
         </div>
 
-        <p className="mt-12 text-sm text-gray-400">
-          Conhece um programa que não está aqui?{' '}
-          <Link href="/contribuir" className="text-blue-600 hover:underline">
-            Contribua com o catálogo
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {estados.map((estado, index) => (
+            <Link
+              key={estado.sigla}
+              href={`/programas?estado=${estado.sigla}`}
+              className={`
+                group bg-white rounded-xl p-5 card-elevate animate-fade-up
+                stagger-${Math.min(index + 1, 6)}
+              `}
+              id={`estado-${estado.sigla.toLowerCase()}`}
+            >
+              <div className="flex items-start justify-between mb-3">
+                <div>
+                  <h3 className="font-semibold text-neutral-900 text-lg group-hover:text-brand-700 transition-colors">
+                    {estado.nome}
+                  </h3>
+                  <p className="text-sm text-neutral-500 mt-0.5">{estado.descricao}</p>
+                </div>
+                <span className="badge badge-estadual shrink-0">
+                  {estado.sigla === 'federal' ? '🇧🇷' : '📍'} {estado.sigla}
+                </span>
+              </div>
+
+              <div className="flex items-center justify-between pt-3 border-t border-neutral-100">
+                <span className="text-sm font-medium text-brand-600">
+                  {estado.total_programas} programa{estado.total_programas !== 1 ? 's' : ''}
+                </span>
+                <svg
+                  className="w-4 h-4 text-neutral-300 group-hover:text-brand-500 group-hover:translate-x-1 transition-all"
+                  fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                </svg>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* ─── CTA final ─── */}
+      <section className="border-t border-neutral-200 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-14 text-center">
+          <h2 className="text-2xl font-bold text-neutral-900 mb-3">
+            Conhece um programa que não está no catálogo?
+          </h2>
+          <p className="text-neutral-500 mb-6 max-w-md mx-auto">
+            Ajude a manter o catálogo completo e atualizado para todos os brasileiros.
+          </p>
+          <Link href="/contribuir" className="btn-primary text-base" id="cta-contribuir-bottom">
+            Contribuir agora
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+            </svg>
           </Link>
-        </p>
-      </div>
+        </div>
+      </section>
     </main>
   )
 }

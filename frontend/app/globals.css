@@ -1,26 +1,354 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* ─── Design Tokens ─── */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
+
+  /* Paleta institucional */
+  --color-brand-900: #0c1f3f;
+  --color-brand-800: #122b54;
+  --color-brand-700: #1a365d;
+  --color-brand-600: #234e84;
+  --color-brand-500: #2b6cb0;
+  --color-brand-400: #4299e1;
+  --color-brand-300: #63b3ed;
+  --color-brand-200: #bee3f8;
+  --color-brand-100: #ebf8ff;
+  --color-brand-50: #f0f7ff;
+
+  /* Verde Brasil */
+  --color-brasil-green: #009739;
+  --color-brasil-green-dark: #006b27;
+  --color-brasil-green-light: #00b344;
+
+  /* Amarelo Ouro */
+  --color-brasil-gold: #fedd00;
+  --color-brasil-gold-dark: #e6c800;
+  --color-brasil-gold-light: #fff176;
+
+  /* Neutros (warm) */
+  --color-neutral-950: #0f1419;
+  --color-neutral-900: #1a1f26;
+  --color-neutral-800: #2d333b;
+  --color-neutral-700: #444c56;
+  --color-neutral-600: #636e7b;
+  --color-neutral-500: #8b949e;
+  --color-neutral-400: #adbac7;
+  --color-neutral-300: #cdd9e5;
+  --color-neutral-200: #e6edf3;
+  --color-neutral-100: #f0f3f6;
+  --color-neutral-50: #f6f8fa;
+
+  /* Semânticas */
+  --color-success: #16a34a;
+  --color-success-light: #dcfce7;
+  --color-warning: #d97706;
+  --color-warning-light: #fef3c7;
+  --color-danger: #dc2626;
+  --color-danger-light: #fee2e2;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --background: #f6f8fa;
+  --foreground: #1a1f26;
+
+  /* Sombras */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.04);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.06), 0 2px 4px -2px rgb(0 0 0 / 0.04);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.04);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.08), 0 8px 10px -6px rgb(0 0 0 / 0.04);
+  --shadow-card: 0 1px 3px rgb(0 0 0 / 0.06), 0 0 0 1px rgb(0 0 0 / 0.04);
+  --shadow-card-hover: 0 8px 24px rgb(0 0 0 / 0.1), 0 0 0 1px rgb(26 54 93 / 0.12);
+
+  /* Raios */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.5rem;
+
+  /* Transições */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* ─── Base ─── */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter, 'Inter', system-ui, -apple-system, sans-serif);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Scrollbar customizada ─── */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-neutral-300);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-neutral-400);
+}
+
+/* ─── Selection ─── */
+::selection {
+  background: var(--color-brand-200);
+  color: var(--color-brand-900);
+}
+
+/* ─── Glassmorphism ─── */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.glass-strong {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px) saturate(200%);
+  -webkit-backdrop-filter: blur(20px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+/* ─── Gradientes hero ─── */
+.gradient-hero {
+  background: linear-gradient(
+    135deg,
+    var(--color-brand-700) 0%,
+    var(--color-brand-800) 30%,
+    var(--color-brasil-green-dark) 65%,
+    var(--color-brasil-green) 100%
+  );
+}
+
+.gradient-hero-overlay {
+  background: linear-gradient(
+    to right,
+    rgba(12, 31, 63, 0.95) 0%,
+    rgba(12, 31, 63, 0.7) 40%,
+    transparent 100%
+  );
+}
+
+/* ─── Indicador ativo do nav ─── */
+.nav-link {
+  position: relative;
+  transition: color var(--transition-base);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-brasil-gold);
+  border-radius: 1px;
+  transition: width var(--transition-base);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* ─── Card hover effect ─── */
+.card-elevate {
+  box-shadow: var(--shadow-card);
+  transition:
+    box-shadow var(--transition-base),
+    transform var(--transition-base);
+}
+
+.card-elevate:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
+}
+
+/* ─── Badge chips ─── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.badge-federal {
+  background: var(--color-brand-100);
+  color: var(--color-brand-700);
+}
+
+.badge-estadual {
+  background: var(--color-success-light);
+  color: var(--color-brasil-green-dark);
+}
+
+.badge-area {
+  background: var(--color-neutral-100);
+  color: var(--color-neutral-700);
+}
+
+.badge-valor {
+  background: var(--color-warning-light);
+  color: var(--color-warning);
+}
+
+/* ─── Botão primário ─── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--color-brand-700);
+  color: white;
+  font-weight: 600;
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-fast);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.08);
+}
+
+.btn-primary:hover {
+  background: var(--color-brand-600);
+  box-shadow: 0 4px 12px rgb(26 54 93 / 0.25);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: white;
+  color: var(--color-brand-700);
+  font-weight: 600;
+  border-radius: var(--radius-lg);
+  border: 1.5px solid var(--color-brand-200);
+  transition: all var(--transition-fast);
+}
+
+.btn-secondary:hover {
+  background: var(--color-brand-50);
+  border-color: var(--color-brand-400);
+}
+
+/* ─── Stat card ─── */
+.stat-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  border-radius: 0 4px 4px 0;
+}
+
+.stat-card-green::before {
+  background: var(--color-brasil-green);
+}
+
+.stat-card-gold::before {
+  background: var(--color-brasil-gold);
+}
+
+.stat-card-blue::before {
+  background: var(--color-brand-500);
+}
+
+/* ─── Select customizado ─── */
+.select-custom {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23636e7b' viewBox='0 0 16 16'%3E%3Cpath d='M4.646 6.146a.5.5 0 0 1 .708 0L8 8.793l2.646-2.647a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1rem;
+  padding-right: 2.5rem;
+}
+
+/* ─── Animações ─── */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.4s ease both;
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--color-neutral-100) 0%,
+    var(--color-neutral-200) 50%,
+    var(--color-neutral-100) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Stagger delay para cards */
+.stagger-1 { animation-delay: 50ms; }
+.stagger-2 { animation-delay: 100ms; }
+.stagger-3 { animation-delay: 150ms; }
+.stagger-4 { animation-delay: 200ms; }
+.stagger-5 { animation-delay: 250ms; }
+.stagger-6 { animation-delay: 300ms; }
+
+/* ─── Focus ring acessível ─── */
+:focus-visible {
+  outline: 2px solid var(--color-brand-500);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ─── Padrão decorativo sutil ─── */
+.pattern-dots {
+  background-image: radial-gradient(circle, var(--color-neutral-200) 1px, transparent 1px);
+  background-size: 20px 20px;
 }

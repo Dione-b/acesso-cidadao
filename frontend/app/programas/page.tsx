@@ -1,76 +1,49 @@
-import { getProgramas } from '@/lib/strapi'
-import { filtrarProgramas } from '@/lib/matching'
-import { ProgramaCard } from '@/components/programas/ProgramaCard'
-import { PerfilUsuario } from '@/types/programa'
-import Link from 'next/link'
+import { Suspense } from 'react'
+import { ProgramasContent } from './ProgramasContent'
 
-interface SearchParams {
-  estado?: string
-  renda_per_capita?: string
-  tamanho_familia?: string
-  perfil?: string
-  area_interesse?: string
+export default function ProgramasPage() {
+  return (
+    <main className="min-h-screen bg-neutral-50">
+      <Suspense fallback={<ProgramasSkeleton />}>
+        <ProgramasContent />
+      </Suspense>
+    </main>
+  )
 }
 
-export default async function ProgramasPage({
-  searchParams,
-}: {
-  searchParams: Promise<SearchParams>
-}) {
-  const params = await searchParams
-  const programas = await getProgramas()
-
-  const temPerfil = params.estado && params.renda_per_capita
-
-  let resultados = programas.map((p) => ({ programa: p, match: undefined as any }))
-
-  if (temPerfil) {
-    const perfil: PerfilUsuario = {
-      estado: params.estado!,
-      renda_per_capita: Number(params.renda_per_capita),
-      tamanho_familia: Number(params.tamanho_familia ?? 1),
-      perfil: (params.perfil as any) ?? 'outro',
-      area_interesse: (params.area_interesse as any) ?? 'todos',
-    }
-    const matches = filtrarProgramas(programas, perfil)
-    resultados = matches.map((m) => ({ programa: m.programa, match: m }))
-  }
-
+function ProgramasSkeleton() {
   return (
-    <main className="min-h-screen bg-gray-50">
-      <div className="max-w-3xl mx-auto px-4 py-10">
-        <div className="flex items-center justify-between mb-6">
-          <div>
-            <h1 className="text-2xl font-bold text-gray-900">
-              {temPerfil ? 'Programas para o seu perfil' : 'Todos os programas'}
-            </h1>
-            <p className="text-gray-500 text-sm mt-1">
-              {resultados.length} programa{resultados.length !== 1 ? 's' : ''} encontrado{resultados.length !== 1 ? 's' : ''}
-            </p>
-          </div>
-          <Link
-            href="/quiz"
-            className="px-4 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-          >
-            Refazer quiz
-          </Link>
-        </div>
-
-        <div className="space-y-3">
-          {resultados.map(({ programa, match }) => (
-            <ProgramaCard key={programa.id} programa={programa} match={match} />
-          ))}
-        </div>
-
-        {resultados.length === 0 && (
-          <div className="text-center py-16 text-gray-500">
-            <p className="text-lg mb-2">Nenhum programa encontrado para este perfil.</p>
-            <Link href="/quiz" className="text-blue-600 hover:underline">
-              Tentar com outro perfil
-            </Link>
-          </div>
-        )}
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-10">
+      {/* Título */}
+      <div className="mb-8">
+        <div className="h-8 w-64 animate-shimmer rounded-lg mb-2" />
+        <div className="h-4 w-40 animate-shimmer rounded-lg" />
       </div>
-    </main>
+
+      {/* Filtros */}
+      <div className="bg-white rounded-xl p-5 mb-8 card-elevate">
+        <div className="h-10 animate-shimmer rounded-lg mb-4" />
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="h-10 animate-shimmer rounded-lg" />
+          <div className="h-10 animate-shimmer rounded-lg" />
+          <div className="h-10 animate-shimmer rounded-lg" />
+        </div>
+      </div>
+
+      {/* Cards */}
+      <div className="space-y-4">
+        {[1, 2, 3, 4].map(i => (
+          <div key={i} className="bg-white rounded-xl p-5 card-elevate">
+            <div className="h-5 w-48 animate-shimmer rounded mb-3" />
+            <div className="h-4 w-full animate-shimmer rounded mb-2" />
+            <div className="h-4 w-3/4 animate-shimmer rounded mb-4" />
+            <div className="flex gap-2">
+              <div className="h-5 w-16 animate-shimmer rounded-full" />
+              <div className="h-5 w-20 animate-shimmer rounded-full" />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
   )
 }
