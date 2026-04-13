@@ -8,15 +8,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Architecture
 
-```
-Frontend (Next.js 14 App Router) → REST API → CMS (Strapi v5) → PostgreSQL (Supabase)
-```
-
 - **Frontend** (`frontend/`): Next.js 14 with App Router + Tailwind CSS, deployed on Vercel
-- **CMS** (`cms/`): Strapi v5 headless CMS, deployed on Contabo VPS
-- **Database**: PostgreSQL via Supabase
 
-The quiz matching logic (`lib/matching.ts`) runs 100% on the frontend — no AI, no backend computation.
+The matching logic (`lib/matching.ts`) runs 100% on the frontend — no AI, no backend computation.
 
 ## Commands
 
@@ -28,19 +22,10 @@ pnpm build        # Production build
 pnpm lint         # Lint
 ```
 
-### CMS (`cms/`)
-
-```bash
-pnpm develop      # Start Strapi in dev mode
-pnpm build        # Build Strapi admin panel
-pnpm start        # Start in production
-```
-
 ## Key Files
 
 | File | Purpose |
 |------|---------|
-| `frontend/lib/strapi.ts` | Strapi REST API client |
 | `frontend/lib/matching.ts` | Quiz eligibility matching logic |
 | `frontend/types/programa.ts` | TypeScript domain types |
 
