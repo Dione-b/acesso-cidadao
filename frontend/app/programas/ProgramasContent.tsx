@@ -3,8 +3,11 @@
 import { useState, useMemo, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { ProgramaCard } from '@/components/programas/ProgramaCard'
+import { Pagination } from '@/components/ui/Pagination'
 import { getTodosProgramas, getEstadosDisponiveis } from '@/data'
 import { Area, PublicoAlvo } from '@/types/programa'
+
+const ITEMS_PER_PAGE = 5
 
 const AREA_LABELS: Record<Area | string, string> = {
   saude: 'Saúde',
@@ -41,6 +44,7 @@ export function ProgramasContent() {
   const [areaSelecionada, setAreaSelecionada] = useState<string>('todas')
   const [publicoSelecionado, setPublicoSelecionado] = useState<string>('todos')
   const [textoBusca, setTextoBusca] = useState('')
+  const [currentPage, setCurrentPage] = useState(1)
 
   useEffect(() => {
     if (urlEstado) {
@@ -74,6 +78,7 @@ export function ProgramasContent() {
     setAreaSelecionada('todas')
     setPublicoSelecionado('todos')
     setTextoBusca('')
+    setCurrentPage(1)
   }
 
   const programasFiltrados = useMemo(() => {
@@ -99,6 +104,17 @@ export function ProgramasContent() {
     })
   }, [todosProgramas, estadoSelecionado, areaSelecionada, publicoSelecionado, textoBusca])
 
+  // Reset para p.1 sempre que algum filtro mudar
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [estadoSelecionado, areaSelecionada, publicoSelecionado, textoBusca])
+
+  const totalPages = Math.ceil(programasFiltrados.length / ITEMS_PER_PAGE)
+  const programasDaPagina = programasFiltrados.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE,
+  )
+
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 py-10">
       {/* Cabeçalho da página */}
@@ -106,6 +122,11 @@ export function ProgramasContent() {
         <h1 className="text-3xl font-bold text-neutral-900">Programas disponíveis</h1>
         <p className="text-neutral-500 mt-1">
           {programasFiltrados.length} programa{programasFiltrados.length !== 1 ? 's' : ''} encontrado{programasFiltrados.length !== 1 ? 's' : ''}
+          {totalPages > 1 && (
+            <span className="ml-2 text-neutral-400">
+              · página {currentPage} de {totalPages}
+            </span>
+          )}
         </p>
       </div>
 
@@ -206,9 +227,9 @@ export function ProgramasContent() {
         )}
       </div>
 
-      {/* Lista de programas */}
+      {/* Lista de programas da página corrente */}
       <div className="space-y-4">
-        {programasFiltrados.map((programa, index) => (
+        {programasDaPagina.map((programa, index) => (
           <div
             key={programa.slug}
             className="animate-fade-up"
@@ -218,6 +239,13 @@ export function ProgramasContent() {
           </div>
         ))}
       </div>
+
+      {/* Paginação */}
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={setCurrentPage}
+      />
 
       {/* Empty state */}
       {programasFiltrados.length === 0 && (
