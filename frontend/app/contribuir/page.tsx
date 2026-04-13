@@ -28,24 +28,24 @@ const HOW_TO_CONTRIBUTE = [
 export default function ContribuirPage() {
   return (
     <main className="min-h-screen bg-neutral-50">
-      <div className="max-w-2xl mx-auto px-4 sm:px-6 py-10">
+      <div className="max-w-2xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
         {/* Breadcrumb */}
-        <nav className="flex items-center gap-2 text-sm mb-6 animate-fade-up" aria-label="Breadcrumb">
-          <Link href="/" className="text-neutral-400 hover:text-brand-600 transition-colors">
+        <nav className="flex items-center gap-2 text-xs sm:text-sm mb-4 sm:mb-6 animate-fade-up" aria-label="Breadcrumb">
+          <Link href="/" className="text-neutral-400 hover:text-brand-600 transition-colors shrink-0">
             Início
           </Link>
-          <svg className="w-3.5 h-3.5 text-neutral-300" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+          <svg className="w-3.5 h-3.5 text-neutral-300 shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
           </svg>
           <span className="text-neutral-600 font-medium">Contribuir</span>
         </nav>
 
         {/* Cabeçalho */}
-        <div className="mb-8 animate-fade-up">
-          <h1 className="text-3xl font-bold text-neutral-900 mb-2">
+        <div className="mb-6 sm:mb-8 animate-fade-up">
+          <h1 className="text-2xl sm:text-3xl font-bold text-neutral-900 mb-2">
             Contribuir com o projeto
           </h1>
-          <p className="text-neutral-500 leading-relaxed">
+          <p className="text-sm sm:text-base text-neutral-500 leading-relaxed">
             O <strong className="text-neutral-700">Acesso Cidadão</strong> é um projeto open source.
             Qualquer pessoa pode contribuir com dados, código ou melhorias diretamente pelo repositório no GitHub.
           </p>
@@ -57,40 +57,40 @@ export default function ContribuirPage() {
           style={{ animationDelay: '100ms' }}
         >
           {/* Header decorativo */}
-          <div className="gradient-hero px-6 sm:px-8 py-8 text-center">
-            <div className="text-5xl mb-3">🤝</div>
-            <h2 className="text-xl font-bold text-white">Projeto open source</h2>
-            <p className="text-white/70 text-sm mt-1">
+          <div className="gradient-hero px-4 sm:px-6 lg:px-8 py-6 sm:py-8 text-center">
+            <div className="text-4xl sm:text-5xl mb-2 sm:mb-3">🤝</div>
+            <h2 className="text-lg sm:text-xl font-bold text-white">Projeto open source</h2>
+            <p className="text-white/70 text-xs sm:text-sm mt-1">
               Contribuições aceitas via Pull Request no GitHub
             </p>
           </div>
 
-          <div className="px-6 sm:px-8 py-8">
+          <div className="px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
             {/* Formas de contribuir */}
-            <h3 className="font-semibold text-neutral-800 mb-4">Como você pode ajudar</h3>
+            <h3 className="font-semibold text-neutral-800 mb-3 sm:mb-4 text-sm sm:text-base">Como você pode ajudar</h3>
 
-            <div className="space-y-3 mb-8">
+            <div className="space-y-2 sm:space-y-3 mb-6 sm:mb-8">
               {HOW_TO_CONTRIBUTE.map(item => (
                 <div
                   key={item.title}
-                  className="flex items-start gap-3 p-3.5 bg-neutral-50 rounded-xl border border-neutral-100"
+                  className="flex items-start gap-2.5 sm:gap-3 p-3 sm:p-3.5 bg-neutral-50 rounded-xl border border-neutral-100"
                 >
-                  <span className="text-xl shrink-0 mt-0.5">{item.icon}</span>
+                  <span className="text-lg sm:text-xl shrink-0 mt-0.5">{item.icon}</span>
                   <div>
                     <p className="font-medium text-neutral-800 text-sm">{item.title}</p>
-                    <p className="text-xs text-neutral-500 mt-0.5">{item.desc}</p>
+                    <p className="text-xs text-neutral-500 mt-0.5 leading-relaxed">{item.desc}</p>
                   </div>
                 </div>
               ))}
             </div>
 
             {/* CTAs */}
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-2.5 sm:gap-3">
               <a
                 href={`${GITHUB_REPO}/issues/new`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-primary text-base w-full justify-center"
+                className="btn-primary text-sm sm:text-base w-full justify-center py-3 sm:py-2.5"
                 id="cta-abrir-issue"
               >
                 {/* Ícone do GitHub */}
@@ -104,7 +104,7 @@ export default function ContribuirPage() {
                 href={`${GITHUB_REPO}/fork`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-secondary text-base w-full justify-center"
+                className="btn-secondary text-sm sm:text-base w-full justify-center py-3 sm:py-2.5"
                 id="cta-fork-repo"
               >
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
@@ -133,7 +133,7 @@ export default function ContribuirPage() {
         </div>
 
         {/* Voltar */}
-        <div className="mt-6 text-center animate-fade-up" style={{ animationDelay: '200ms' }}>
+        <div className="mt-4 sm:mt-6 text-center animate-fade-up" style={{ animationDelay: '200ms' }}>
           <Link
             href="/programas"
             className="text-sm text-brand-600 hover:text-brand-700 font-medium transition-colors inline-flex items-center gap-1"

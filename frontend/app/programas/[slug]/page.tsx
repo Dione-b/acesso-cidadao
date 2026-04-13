@@ -49,49 +49,49 @@ export default async function ProgramaPage({ params }: { params: Promise<{ slug:
 
   return (
     <main className="min-h-screen bg-neutral-50">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 py-10">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
         {/* Breadcrumb */}
-        <nav className="flex items-center gap-2 text-sm mb-8 animate-fade-up" aria-label="Breadcrumb">
-          <Link href="/programas" className="text-neutral-400 hover:text-brand-600 transition-colors">
+        <nav className="flex items-center gap-2 text-xs sm:text-sm mb-4 sm:mb-8 animate-fade-up" aria-label="Breadcrumb">
+          <Link href="/programas" className="text-neutral-400 hover:text-brand-600 transition-colors shrink-0">
             Programas
           </Link>
-          <svg className="w-3.5 h-3.5 text-neutral-300" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+          <svg className="w-3.5 h-3.5 text-neutral-300 shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
           </svg>
-          <span className="text-neutral-600 font-medium truncate">{programa.nome}</span>
+          <span className="text-neutral-600 font-medium truncate min-w-0">{programa.nome}</span>
         </nav>
 
         {/* Card principal */}
         <article className="bg-white rounded-2xl card-elevate overflow-hidden animate-fade-up" style={{ animationDelay: '100ms' }}>
           {/* Header do card */}
-          <div className="gradient-hero px-6 sm:px-8 py-6">
-            <div className="flex flex-wrap items-center gap-2 mb-3">
-              <span className="badge bg-white/15 text-white border border-white/20 backdrop-blur-sm">
+          <div className="gradient-hero px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-2 sm:mb-3">
+              <span className="badge bg-white/15 text-white border border-white/20 backdrop-blur-sm text-xs sm:text-sm">
                 {ESFERA_LABEL[programa.esfera]}
               </span>
               {programa.status === 'ativo' && (
-                <span className="badge bg-green-400/20 text-green-100 border border-green-400/20">
+                <span className="badge bg-green-400/20 text-green-100 border border-green-400/20 text-xs sm:text-sm">
                   ● Ativo
                 </span>
               )}
               {programa.status === 'suspenso' && (
-                <span className="badge bg-yellow-400/20 text-yellow-100 border border-yellow-400/20">
+                <span className="badge bg-yellow-400/20 text-yellow-100 border border-yellow-400/20 text-xs sm:text-sm">
                   ⏸ Suspenso
                 </span>
               )}
               {programa.status === 'encerrado' && (
-                <span className="badge bg-red-400/20 text-red-100 border border-red-400/20">
+                <span className="badge bg-red-400/20 text-red-100 border border-red-400/20 text-xs sm:text-sm">
                   ✕ Encerrado
                 </span>
               )}
             </div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-white leading-tight">{programa.nome}</h1>
+            <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white leading-tight">{programa.nome}</h1>
           </div>
 
           {/* Corpo */}
-          <div className="px-6 sm:px-8 py-6 space-y-6">
+          <div className="px-4 sm:px-6 lg:px-8 py-4 sm:py-6 space-y-4 sm:space-y-6">
             {/* Descrição */}
-            <p className="text-neutral-700 leading-relaxed text-base">
+            <p className="text-neutral-700 leading-relaxed text-sm sm:text-base">
               {programa.descricao}
             </p>
 
@@ -173,7 +173,7 @@ export default async function ProgramaPage({ params }: { params: Promise<{ slug:
                 href={programa.link_oficial}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-primary text-base w-full justify-center"
+                className="btn-primary text-sm sm:text-base w-full justify-center py-3 sm:py-2.5"
                 id="link-oficial"
               >
                 Acessar site oficial
@@ -185,16 +185,16 @@ export default async function ProgramaPage({ params }: { params: Promise<{ slug:
           </div>
 
           {/* Rodapé do card */}
-          <div className="px-6 sm:px-8 py-4 bg-neutral-50 border-t border-neutral-100 text-xs text-neutral-400 flex items-center justify-between">
+          <div className="px-4 sm:px-6 lg:px-8 py-3 sm:py-4 bg-neutral-50 border-t border-neutral-100 text-xs text-neutral-400 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-0">
             <span>
               Atualizado em {new Date(programa.data_atualizacao).toLocaleDateString('pt-BR')}
             </span>
-            <span>Fonte: {programa.fonte}</span>
+            <span className="truncate">Fonte: {programa.fonte}</span>
           </div>
         </article>
 
         {/* Voltar */}
-        <div className="mt-6 text-center animate-fade-up" style={{ animationDelay: '200ms' }}>
+        <div className="mt-4 sm:mt-6 text-center animate-fade-up" style={{ animationDelay: '200ms' }}>
           <Link href="/programas" className="text-sm text-brand-600 hover:text-brand-700 font-medium transition-colors inline-flex items-center gap-1">
             <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />

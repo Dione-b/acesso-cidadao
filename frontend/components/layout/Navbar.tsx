@@ -35,13 +35,14 @@ export function Navbar() {
         </Link>
 
         {/* Navegação */}
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-0.5 sm:gap-1">
           {NAV_ITEMS.map(({ href, label }) => (
             <Link
               key={href}
               href={href}
               className={`
-                nav-link px-3 py-2 rounded-lg text-sm font-medium transition-colors
+                nav-link px-2.5 sm:px-3 py-2.5 sm:py-2 rounded-lg text-sm font-medium transition-colors
+                min-h-[44px] flex items-center
                 ${isActive(href)
                   ? 'text-brand-700 bg-brand-50'
                   : 'text-neutral-600 hover:text-brand-700 hover:bg-neutral-50'
@@ -55,7 +56,8 @@ export function Navbar() {
           <Link
             href="/contribuir"
             className={`
-              ml-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all
+              ml-1 sm:ml-2 px-3 sm:px-4 py-2.5 sm:py-2 rounded-lg text-sm font-semibold transition-all
+              min-h-[44px] flex items-center
               ${isActive('/contribuir')
                 ? 'bg-brand-700 text-white shadow-sm'
                 : 'bg-brand-700 text-white hover:bg-brand-600 shadow-sm hover:shadow-md'

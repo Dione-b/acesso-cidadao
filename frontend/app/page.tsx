@@ -35,19 +35,19 @@ export default function HomePage() {
         {/* Faixa amarela decorativa */}
         <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-brasil-gold/10 to-transparent" />
 
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 py-20 md:py-28">
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-20 md:py-28">
           <div className="max-w-2xl">
             <div className="animate-fade-up">
-              <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 text-white/90 text-xs font-medium mb-6 backdrop-blur-sm border border-white/10">
+              <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 text-white/90 text-xs font-medium mb-4 sm:mb-6 backdrop-blur-sm border border-white/10">
                 🇧🇷 Plataforma aberta e colaborativa
               </span>
 
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white leading-tight tracking-tight mb-5">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight tracking-tight mb-4 sm:mb-5">
                 Descubra seus{' '}
                 <span className="text-brasil-gold">direitos</span>
               </h1>
 
-              <p className="text-lg sm:text-xl text-white/80 leading-relaxed mb-8 max-w-lg">
+              <p className="text-base sm:text-lg md:text-xl text-white/80 leading-relaxed mb-6 sm:mb-8 max-w-lg">
                 Encontre benefícios do governo federal e estadual disponíveis para você e sua família — em um único lugar.
               </p>
             </div>
@@ -77,18 +77,18 @@ export default function HomePage() {
 
       {/* ─── Stats ─── */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 -mt-8 relative z-10">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="stat-card stat-card-green bg-white rounded-xl px-6 py-5 card-elevate animate-fade-up stagger-1">
-            <p className="text-3xl font-bold text-neutral-900">{totalProgramas}</p>
-            <p className="text-sm text-neutral-500 mt-0.5">Programas cadastrados</p>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+          <div className="stat-card stat-card-green bg-white rounded-xl px-4 sm:px-6 py-4 sm:py-5 card-elevate animate-fade-up stagger-1">
+            <p className="text-2xl sm:text-3xl font-bold text-neutral-900">{totalProgramas}</p>
+            <p className="text-xs sm:text-sm text-neutral-500 mt-0.5">Programas cadastrados</p>
           </div>
-          <div className="stat-card stat-card-gold bg-white rounded-xl px-6 py-5 card-elevate animate-fade-up stagger-2">
-            <p className="text-3xl font-bold text-neutral-900">{programasAtivos}</p>
-            <p className="text-sm text-neutral-500 mt-0.5">Programas ativos</p>
+          <div className="stat-card stat-card-gold bg-white rounded-xl px-4 sm:px-6 py-4 sm:py-5 card-elevate animate-fade-up stagger-2">
+            <p className="text-2xl sm:text-3xl font-bold text-neutral-900">{programasAtivos}</p>
+            <p className="text-xs sm:text-sm text-neutral-500 mt-0.5">Programas ativos</p>
           </div>
-          <div className="stat-card stat-card-blue bg-white rounded-xl px-6 py-5 card-elevate animate-fade-up stagger-3">
-            <p className="text-3xl font-bold text-neutral-900">{areasUnicas.size}</p>
-            <p className="text-sm text-neutral-500 mt-0.5">Áreas de atuação</p>
+          <div className="stat-card stat-card-blue bg-white rounded-xl px-4 sm:px-6 py-4 sm:py-5 card-elevate animate-fade-up stagger-3">
+            <p className="text-2xl sm:text-3xl font-bold text-neutral-900">{areasUnicas.size}</p>
+            <p className="text-xs sm:text-sm text-neutral-500 mt-0.5">Áreas de atuação</p>
           </div>
         </div>
       </section>
@@ -104,13 +104,13 @@ export default function HomePage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
           {estados.map((estado, index) => (
             <Link
               key={estado.sigla}
               href={`/programas?estado=${estado.sigla}`}
               className={`
-                group bg-white rounded-xl p-5 card-elevate animate-fade-up
+                group bg-white rounded-xl p-4 sm:p-5 card-elevate animate-fade-up
                 stagger-${Math.min(index + 1, 6)}
               `}
               id={`estado-${estado.sigla.toLowerCase()}`}
@@ -145,14 +145,14 @@ export default function HomePage() {
 
       {/* ─── CTA final ─── */}
       <section className="border-t border-neutral-200 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-14 text-center">
-          <h2 className="text-2xl font-bold text-neutral-900 mb-3">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-14 text-center">
+          <h2 className="text-xl sm:text-2xl font-bold text-neutral-900 mb-3">
             Conhece um programa que não está no catálogo?
           </h2>
-          <p className="text-neutral-500 mb-6 max-w-md mx-auto">
+          <p className="text-sm sm:text-base text-neutral-500 mb-6 max-w-md mx-auto">
             Ajude a manter o catálogo completo e atualizado para todos os brasileiros.
           </p>
-          <Link href="/contribuir" className="btn-primary text-base" id="cta-contribuir-bottom">
+          <Link href="/contribuir" className="btn-primary text-sm sm:text-base" id="cta-contribuir-bottom">
             Contribuir agora
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />

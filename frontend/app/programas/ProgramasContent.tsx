@@ -146,14 +146,14 @@ export function ProgramasContent() {
               placeholder="Buscar programa por nome ou descrição..."
               value={textoBusca}
               onChange={e => setTextoBusca(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 border border-neutral-200 rounded-lg text-sm text-neutral-800 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition"
+              className="w-full pl-10 pr-4 py-3 border border-neutral-200 rounded-lg text-base text-neutral-800 placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition"
               id="busca-programas"
             />
           </div>
         </div>
 
         {/* Dropdowns */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
           <div>
             <label htmlFor="filtro-estado" className="block text-xs font-semibold text-neutral-500 uppercase tracking-wider mb-1.5">
               Estado
@@ -162,7 +162,7 @@ export function ProgramasContent() {
               id="filtro-estado"
               value={estadoSelecionado}
               onChange={e => setEstadoSelecionado(e.target.value)}
-              className="select-custom w-full border border-neutral-200 rounded-lg px-3 py-2.5 text-sm text-neutral-800 bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition"
+              className="select-custom w-full border border-neutral-200 rounded-lg px-3 py-3 text-base text-neutral-800 bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition"
             >
               <option value="todos">Todos os estados</option>
               {estadosDisponiveis.map(e => (
@@ -181,7 +181,7 @@ export function ProgramasContent() {
               id="filtro-area"
               value={areaSelecionada}
               onChange={e => setAreaSelecionada(e.target.value)}
-              className="select-custom w-full border border-neutral-200 rounded-lg px-3 py-2.5 text-sm text-neutral-800 bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition"
+              className="select-custom w-full border border-neutral-200 rounded-lg px-3 py-3 text-base text-neutral-800 bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition"
             >
               <option value="todas">Todas as áreas</option>
               {areasDisponiveis.map(a => (
@@ -200,7 +200,7 @@ export function ProgramasContent() {
               id="filtro-publico"
               value={publicoSelecionado}
               onChange={e => setPublicoSelecionado(e.target.value)}
-              className="select-custom w-full border border-neutral-200 rounded-lg px-3 py-2.5 text-sm text-neutral-800 bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition"
+              className="select-custom w-full border border-neutral-200 rounded-lg px-3 py-3 text-base text-neutral-800 bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition"
             >
               <option value="todos">Todos os públicos</option>
               {publicosDisponiveis.map(p => (
